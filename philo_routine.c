@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:56:32 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/25 12:16:05 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:20:20 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->start = get_current_time();
-	if (philo->philo_id >= 0)
+	if (philo->philo_id % 2 == 0)
 	{
 		print_status(philo, "is sleeping");
 		ft_usleep(philo->time_to_sleep);
@@ -63,10 +63,13 @@ void	*philo_routine(void *arg)
 		pthread_mutex_lock(philo->left_fork);
 		print_status(philo, "has taken a fork");
 		pthread_mutex_lock(&(philo->right_fork));
+		print_status(philo, "has taken a fork");
 		print_status(philo, "is eating");
 		ft_usleep(philo->time_to_eat);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(&(philo->right_fork));
+		print_status(philo, "is sleeping");
+		ft_usleep(philo->time_to_sleep);
 		print_status(philo, "is thinking");
 	}
 	return (NULL);
