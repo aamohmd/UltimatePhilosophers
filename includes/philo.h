@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:24:05 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/25 11:20:57 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:43:46 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ typedef struct s_data
 
 size_t	get_current_time(void);
 void	*philo_routine(void *arg);
+void	*monitor_routine(void *arg);
+void	print_status(t_philo *philo, char *status);
 
 #endif

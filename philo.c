@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 10:43:42 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/25 19:06:16 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:39:38 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 {
 	t_data		data;
 	t_philo		*head;
-	// pthread_t	monitor;
+	pthread_t	monitor;
 
 	if (argc < 5)
 	{
@@ -89,14 +89,14 @@ int	main(int argc, char **argv)
 	setup_env(&data, argv);
 	setup_philos(&data);
 	setup_forks(&data);
-	// pthread_create(&monitor, NULL, philo_routine, &data);
+	pthread_create(&monitor, NULL, monitor_routine, &data);
 	head = data.philos;
 	while (head)
 	{
 		pthread_create(&head->thread, NULL, philo_routine, head);
 		head = head->next;
 	}
-	// pthread_join(monitor, NULL);
+	pthread_join(monitor, NULL);
 	head = data.philos;
 	while (head)
 	{
