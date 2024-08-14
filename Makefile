@@ -6,14 +6,14 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/11 10:37:39 by aamohame          #+#    #+#              #
-#    Updated: 2024/05/25 19:38:29 by aamohame         ###   ########.fr        #
+#    Updated: 2024/08/13 15:35:12 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		 = philo
 BONUS_NAME	 = philo_bonus
 CC			 = gcc
-CFLAGS		 = -Wall -Werror -Wextra -pthread
+CFLAGS		 = -Wall -Werror -Wextra -pthread -fsanitize=thread
 RM			 = rm -f
 
 LIB			 = lib/
@@ -25,7 +25,7 @@ DEF_COLOR = \033[0;39m
 GREEN = \033[0;92m
 YELLOW = \033[0;93m
 
-SRCS		 = philo.c philo_routine.c philo_utils.c monitor.c
+SRCS		 = philo.c philo_routine.c monitor.c
 BONUS_SRCS	 = 
 OBJS		 = $(SRCS:.c=.o)
 BONUS_OBJS	 = $(BONUS_SRCS:.c=.o)

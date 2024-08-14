@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:24:05 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/25 19:43:46 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:37:28 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define LOCK 0
+# define UNLOCK 1
+
+typedef struct s_data	t_data;
+
 typedef struct s_philo
 {
 	int				philo_id;
@@ -29,6 +34,7 @@ typedef struct s_philo
 	int				nb_must_eat;
 	int				nb_eat;
 	int				is_dead;
+	size_t			last_meal;
 	size_t			start;
 	pthread_t		thread;
 	pthread_mutex_t	right_fork;
@@ -37,7 +43,8 @@ typedef struct s_philo
 	pthread_mutex_t	*dead;
 	pthread_mutex_t	*meal;
 	struct s_philo	*next;
-    struct s_philo	*prev;
+	struct s_philo	*prev;
+	t_data			*data;
 }					t_philo;
 
 typedef struct s_data
@@ -47,6 +54,8 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_must_eat;
+	int				stop_condition;
+	int				nb_eat;
 	pthread_mutex_t	dead;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	print;
@@ -55,7 +64,8 @@ typedef struct s_data
 
 size_t	get_current_time(void);
 void	*philo_routine(void *arg);
-void	*monitor_routine(void *arg);
 void	print_status(t_philo *philo, char *status);
+void	philo_dead(t_data *data);
+int		data_correct(char **argv);
 
 #endif

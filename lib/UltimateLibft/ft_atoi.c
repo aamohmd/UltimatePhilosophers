@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:31:49 by aamohame          #+#    #+#             */
-/*   Updated: 2023/12/19 14:18:34 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:07:18 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	ft_atoi(const char *str)
 	{
 		result *= 10;
 		result += *str - '0';
-		if (result > 9223372036854775807 && sign == 1)
+		if (result > 2147483647 && sign == 1)
 			return (-1);
-		if (result > 9223372036854775807 && sign == -1)
+		if (result > 2147483647 && sign == -1)
 			return (0);
 		str++;
 	}
