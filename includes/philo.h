@@ -6,14 +6,13 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:24:05 by aamohame          #+#    #+#             */
-/*   Updated: 2024/08/13 11:37:28 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:46:24 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "../lib/UltimateLibft/libft.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -56,6 +55,7 @@ typedef struct s_data
 	int				nb_must_eat;
 	int				stop_condition;
 	int				nb_eat;
+	size_t			start;
 	pthread_mutex_t	dead;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	print;
@@ -64,8 +64,11 @@ typedef struct s_data
 
 size_t	get_current_time(void);
 void	*philo_routine(void *arg);
-void	print_status(t_philo *philo, char *status);
+void	print_status(t_philo *philo, char *status, int lock);
 void	philo_dead(t_data *data);
 int		data_correct(char **argv);
+void	free_all(t_data *data);
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 
 #endif

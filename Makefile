@@ -6,48 +6,30 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/11 10:37:39 by aamohame          #+#    #+#              #
-#    Updated: 2024/08/13 15:35:12 by aamohame         ###   ########.fr        #
+#    Updated: 2024/08/31 07:38:25 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		 = philo
-BONUS_NAME	 = philo_bonus
 CC			 = gcc
-CFLAGS		 = -Wall -Werror -Wextra -pthread -fsanitize=thread
+CFLAGS		 = -Wall -Werror -Wextra -g -fsanitize=thread
 RM			 = rm -f
-
-LIB			 = lib/
-LIBFT_DIR	 = $(LIB)UltimateLibft/
-LIBFT		 = $(LIBFT_DIR)libft.a
 
 # Colors
 DEF_COLOR = \033[0;39m
 GREEN = \033[0;92m
 YELLOW = \033[0;93m
 
-SRCS		 = philo.c philo_routine.c monitor.c
-BONUS_SRCS	 = 
+SRCS		 = philo.c philo_routine.c monitor.c ft_isdigit.c ft_atoi.c
 OBJS		 = $(SRCS:.c=.o)
-BONUS_OBJS	 = $(BONUS_SRCS:.c=.o)
 INCS		 = includes/philo.h
-INCS_BONUS	 = 
 
-all: makelibs
-	@$(MAKE) -s $(NAME)
-
-makelibs:
-	@$(MAKE) -s -C $(LIBFT_DIR)
-
-bonus: makelibs
-	@$(MAKE) -s $(BONUS_NAME)
-
-$(BONUS_NAME) : $(BONUS_OBJS) $(INCS_BONUS)
-	@$(CC) $(CFLAGS) -L $(LIBFT_DIR) -lft $(BONUS_OBJS) -o $(BONUS_NAME)
-	@echo "$(GREEN)✨ FDF bonus compiled!$(DEF_COLOR)"
+all:
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) $(INCS)
-	@$(CC) $(CFLAGS) -L $(LIBFT_DIR) -lft $(OBJS) -o $(NAME)
-	@echo "$(GREEN)✨ FDF compiled!$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@echo "$(GREEN)✨ PHILOSOPHERS compiled!$(DEF_COLOR)"
 
 %.o: %.c
 	@echo "🍩 $(YELLOW)Compiling: $< $(DEF_COLOR)"
@@ -56,18 +38,10 @@ $(NAME): $(OBJS) $(INCS)
 clean:
 	@$(RM) $(OBJS)
 	@echo "$(YELLOW) PHILO Objects Deleted!"
-	@$(RM) $(BONUS_OBJS)
-	@echo "$(YELLOW) PHILO Bonus Objects Deleted!"
-	@$(MAKE) clean -s -C $(LIBFT_DIR)
-	@echo "$(YELLOW) Libft Objects Deleted!"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(YELLOW) PHILO Name Deleted!"
-	@$(RM) $(BONUS_NAME)
-	@echo "$(YELLOW) PHILO bonus Name Deleted!"
-	@$(MAKE) fclean -s -C $(LIBFT_DIR)
-	@echo "$(YELLOW) Libft Name Deleted!"
 
 re:	fclean all
 

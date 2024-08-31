@@ -6,11 +6,11 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:31:49 by aamohame          #+#    #+#             */
-/*   Updated: 2024/08/13 15:07:18 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:44:49 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/philo.h"
 
 int	ft_atoi(const char *str)
 {

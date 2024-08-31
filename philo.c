@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 10:43:42 by aamohame          #+#    #+#             */
-/*   Updated: 2024/08/22 21:07:12 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/31 07:39:31 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	setup_forks(t_data *data)
 {
 	t_philo	*head;
 
+	data->stop_condition = 0;
+	data->nb_eat = 0;
 	head = data->philos;
 	while (head->next)
 	{
@@ -85,8 +87,8 @@ int	setup_env(t_data *data, char **argv)
 	if (argv[5])
 	{
 		data->nb_must_eat = ft_atoi(argv[5]);
-		if (data->nb_must_eat == -1)
-			return (printf("Error: Number of times must eat is over int max\n"),
+		if (data->nb_must_eat == -1 || data->nb_must_eat == 0)
+			return (printf("Error: Number of times\n"),
 				1);
 	}
 	else
@@ -102,18 +104,17 @@ int	main(int argc, char **argv)
 	t_data	data;
 	t_philo	*head;
 
-	if (argc < 5)
+	if (argc < 5 || argc > 6)
 		return (printf("Error: Wrong number of arguments\n"), 1);
-	data.stop_condition = 0;
-	data.nb_eat = 0;
 	if (setup_env(&data, argv))
 		return (1);
 	setup_philos(&data);
 	setup_forks(&data);
 	head = data.philos;
+	data.start = get_current_time();
 	while (head)
 	{
-		head->last_meal = get_current_time();
+		head->last_meal = data.start;
 		pthread_create(&head->thread, NULL, philo_routine, head);
 		head = head->next;
 	}
@@ -124,5 +125,5 @@ int	main(int argc, char **argv)
 		pthread_join(head->thread, NULL);
 		head = head->next;
 	}
-	return (0);
+	return (free_all(&data), 0);
 }

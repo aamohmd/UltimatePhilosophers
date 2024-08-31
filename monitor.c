@@ -6,11 +6,29 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:33:43 by aamohame          #+#    #+#             */
-/*   Updated: 2024/08/13 16:55:19 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/30 10:11:00 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philo.h"
+
+void	free_all(t_data *data)
+{
+	t_philo	*head;
+	t_philo	*tmp;
+
+	head = data->philos;
+	while (head)
+	{
+		tmp = head->next;
+		pthread_mutex_destroy(&head->right_fork);
+		free(head);
+		head = tmp;
+	}
+	pthread_mutex_destroy(&data->dead);
+	pthread_mutex_destroy(&data->meal);
+	pthread_mutex_destroy(&data->print);
+}
 
 int	data_correct(char **argv)
 {
@@ -41,8 +59,9 @@ void	check_dead(t_philo *head, t_data *data)
 		{
 			if (!data->stop_condition && !data->nb_eat)
 			{
-				print_status(head, "died");
+				print_status(head, "died", UNLOCK);
 				data->stop_condition = 1;
+				pthread_mutex_unlock(&data->dead);
 			}
 		}
 		pthread_mutex_unlock(&data->meal);
