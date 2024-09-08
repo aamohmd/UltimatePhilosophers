@@ -6,13 +6,13 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/11 10:37:39 by aamohame          #+#    #+#              #
-#    Updated: 2024/08/31 07:38:25 by aamohame         ###   ########.fr        #
+#    Updated: 2024/08/30 13:38:06 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		 = philo
 CC			 = gcc
-CFLAGS		 = -Wall -Werror -Wextra -g -fsanitize=thread
+CFLAGS		 = -Wall -Werror -Wextra
 RM			 = rm -f
 
 # Colors
@@ -29,7 +29,7 @@ all:
 
 $(NAME): $(OBJS) $(INCS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)✨ PHILOSOPHERS compiled!$(DEF_COLOR)"
+	@echo "$(GREEN)✨ FDF compiled!$(DEF_COLOR)"
 
 %.o: %.c
 	@echo "🍩 $(YELLOW)Compiling: $< $(DEF_COLOR)"

@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 10:43:42 by aamohame          #+#    #+#             */
-/*   Updated: 2024/08/31 07:39:31 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:57:48 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 	t_philo	*head;
 
-	if (argc < 5 || argc > 6)
+	if (argc < 5)
 		return (printf("Error: Wrong number of arguments\n"), 1);
 	if (setup_env(&data, argv))
 		return (1);
