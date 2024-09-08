@@ -29,7 +29,7 @@ all:
 
 $(NAME): $(OBJS) $(INCS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)✨ FDF compiled!$(DEF_COLOR)"
+	@echo "$(GREEN)✨ PHILO compiled!$(DEF_COLOR)"
 
 %.o: %.c
 	@echo "🍩 $(YELLOW)Compiling: $< $(DEF_COLOR)"
